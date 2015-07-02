@@ -20,8 +20,12 @@ var attach = function(songs){
 
 var search = function(query){
 	superagent
-		.get('http://api.deezer.com/search')
-		.query({q: query})
+		//.get('http://api.deezer.com/search')
+		//.query({q: query})
+
+		//using proxy because of problems with CORS
+		.get('http://jsonp.afeld.me?url=http://api.deezer.com/search?q='+ query)
+
 		.end(function(err,res){
 			console.log(res.body.data);
 			attach(res.body.data);
